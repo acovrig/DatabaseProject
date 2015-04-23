@@ -105,7 +105,7 @@
     <Key>
       <PropertyRef Name="TransID" />
     </Key>
-    <Property Name="TransID" Type="int" Nullable="false" />
+    <Property Name="TransID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Amount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="AcctID" Type="int" Nullable="false" />
     <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />

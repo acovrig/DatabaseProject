@@ -1,4 +1,4 @@
-﻿@model DatabaseProject.Account
+﻿@model DatabaseProject.Category
 
 @{
     ViewBag.Title = "Edit";
@@ -11,22 +11,24 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Account</legend>
+        <legend>Category</legend>
+
+        @Html.HiddenFor(model => model.CategoryID)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.type)
+            @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.type)
-            @Html.ValidationMessageFor(model => model.type)
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BankID, "Bank")
+            @Html.LabelFor(model => model.TaxDeductible)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("BankID", String.Empty)
-            @Html.ValidationMessageFor(model => model.BankID)
+            @Html.EditorFor(model => model.TaxDeductible)
+            @Html.ValidationMessageFor(model => model.TaxDeductible)
         </div>
 
         <p>

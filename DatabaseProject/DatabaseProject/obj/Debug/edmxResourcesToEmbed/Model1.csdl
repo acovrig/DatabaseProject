@@ -32,7 +32,7 @@
     <Key>
       <PropertyRef Name="AcctID" />
     </Key>
-    <Property Name="AcctID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="AcctID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="BankID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Transactions" Relationship="MoneyModel.AcctIDConstraint" FromRole="Accounts" ToRole="Transactions" />
@@ -55,7 +55,7 @@
     <Key>
       <PropertyRef Name="CategoryID" />
     </Key>
-    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="TaxDeductible" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Transactions" Relationship="MoneyModel.CategoriesTran" FromRole="Category" ToRole="Transactions" />
@@ -64,7 +64,7 @@
     <Key>
       <PropertyRef Name="LoanID" />
     </Key>
-    <Property Name="LoanID" Type="Int32" Nullable="false" />
+    <Property Name="LoanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="BankID" Type="Int32" Nullable="false" />
     <Property Name="Company" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
@@ -86,8 +86,8 @@
     <Key>
       <PropertyRef Name="TransID" />
     </Key>
-    <Property Name="TransID" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="TransID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Scale="2" Precision="10" />
     <Property Name="AcctID" Type="Int32" Nullable="false" />
     <Property Name="To" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="From" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />

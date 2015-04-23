@@ -60,7 +60,7 @@ CREATE TABLE [Loans] (
 -- Table: Transactions
 CREATE TABLE [Transactions] (
     TransID int  NOT NULL,
-    Amount decimal(10,2)  NOT NULL,
+    Amount decimal(10,2) NOT NULL,
     AcctID int  NOT NULL,
     "To" varchar(100)  NOT NULL,
     "From" varchar(100)  NOT NULL,

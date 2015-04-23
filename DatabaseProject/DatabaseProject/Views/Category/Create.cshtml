@@ -1,36 +1,36 @@
-﻿@model DatabaseProject.Account
+﻿@model DatabaseProject.Category
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Account</legend>
+        <legend>Category</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.type)
+            @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.type)
-            @Html.ValidationMessageFor(model => model.type)
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BankID, "Bank")
+            @Html.LabelFor(model => model.TaxDeductible)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("BankID", String.Empty)
-            @Html.ValidationMessageFor(model => model.BankID)
+            @Html.EditorFor(model => model.TaxDeductible)
+            @Html.ValidationMessageFor(model => model.TaxDeductible)
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Create" />
         </p>
     </fieldset>
 }
