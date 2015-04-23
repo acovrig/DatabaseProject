@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MoneyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MoneyModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="MoneyModel.Store.Accounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Banks" EntityType="MoneyModel.Store.Banks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Category" EntityType="MoneyModel.Store.Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Loans" EntityType="MoneyModel.Store.Loans" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Payees" EntityType="MoneyModel.Store.Payees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="AcctIDConstraint" Association="MoneyModel.Store.AcctIDConstraint">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="BankID" Association="MoneyModel.Store.BankID">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="Banks_Loans" Association="MoneyModel.Store.Banks_Loans">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="CategoriesTran" Association="MoneyModel.Store.CategoriesTran">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="Payees_Loans" Association="MoneyModel.Store.Payees_Loans">
+            <End Role="Payees" EntitySet="Payees" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AcctID" />
+          </Key>
+          <Property Name="AcctID" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="BankID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="BankID" />
+          </Key>
+          <Property Name="BankID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Street" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ZIP" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6035: The relationship 'CategoriesPay' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+      -->
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TaxDeductible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loans">
+          <Key>
+            <PropertyRef Name="LoanID" />
+          </Key>
+          <Property Name="LoanID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="BankID" Type="int" Nullable="false" />
+          <Property Name="Company" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Payees">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastAmount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Note" Type="text" Nullable="false" />
+          <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="TransID" />
+          </Key>
+          <Property Name="TransID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="AcctID" Type="int" Nullable="false" />
+          <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="From" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Note" Type="text" Nullable="false" />
+          <Property Name="Reconciled" Type="bit" Nullable="false" />
+          <Property Name="CheckNum" Type="bit" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+        </EntityType>
+        <Association Name="AcctIDConstraint">
+          <End Role="Accounts" Type="MoneyModel.Store.Accounts" Multiplicity="1" />
+          <End Role="Transactions" Type="MoneyModel.Store.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AcctID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="AcctID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BankID">
+          <End Role="Banks" Type="MoneyModel.Store.Banks" Multiplicity="1" />
+          <End Role="Accounts" Type="MoneyModel.Store.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Banks_Loans">
+          <End Role="Banks" Type="MoneyModel.Store.Banks" Multiplicity="1" />
+          <End Role="Loans" Type="MoneyModel.Store.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoriesTran">
+          <End Role="Category" Type="MoneyModel.Store.Category" Multiplicity="1" />
+          <End Role="Transactions" Type="MoneyModel.Store.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payees_Loans">
+          <End Role="Payees" Type="MoneyModel.Store.Payees" Multiplicity="1" />
+          <End Role="Loans" Type="MoneyModel.Store.Loans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payees">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="Company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoneyModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MoneyEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="MoneyModel.Account" />
+          <EntitySet Name="Banks" EntityType="MoneyModel.Bank" />
+          <EntitySet Name="Categories" EntityType="MoneyModel.Category" />
+          <EntitySet Name="Loans" EntityType="MoneyModel.Loan" />
+          <EntitySet Name="Payees" EntityType="MoneyModel.Payee" />
+          <EntitySet Name="Transactions" EntityType="MoneyModel.Transaction" />
+          <AssociationSet Name="AcctIDConstraint" Association="MoneyModel.AcctIDConstraint">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="BankID" Association="MoneyModel.BankID">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="Banks_Loans" Association="MoneyModel.Banks_Loans">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="CategoriesTran" Association="MoneyModel.CategoriesTran">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="Payees_Loans" Association="MoneyModel.Payees_Loans">
+            <End Role="Payees" EntitySet="Payees" />
+            <End Role="Loans" EntitySet="Loans" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AcctID" />
+          </Key>
+          <Property Name="AcctID" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BankID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="MoneyModel.AcctIDConstraint" FromRole="Accounts" ToRole="Transactions" />
+          <NavigationProperty Name="Bank" Relationship="MoneyModel.BankID" FromRole="Accounts" ToRole="Banks" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="BankID" />
+          </Key>
+          <Property Name="BankID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Street" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ZIP" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="MoneyModel.BankID" FromRole="Banks" ToRole="Accounts" />
+          <NavigationProperty Name="Loans" Relationship="MoneyModel.Banks_Loans" FromRole="Banks" ToRole="Loans" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TaxDeductible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="MoneyModel.CategoriesTran" FromRole="Category" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="LoanID" />
+          </Key>
+          <Property Name="LoanID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="BankID" Type="Int32" Nullable="false" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Bank" Relationship="MoneyModel.Banks_Loans" FromRole="Loans" ToRole="Banks" />
+          <NavigationProperty Name="Payee" Relationship="MoneyModel.Payees_Loans" FromRole="Loans" ToRole="Payees" />
+        </EntityType>
+        <EntityType Name="Payee">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="LastAmount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="To" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Loans" Relationship="MoneyModel.Payees_Loans" FromRole="Payees" ToRole="Loans" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransID" />
+          </Key>
+          <Property Name="TransID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="AcctID" Type="Int32" Nullable="false" />
+          <Property Name="To" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="From" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Reconciled" Type="Boolean" Nullable="false" />
+          <Property Name="CheckNum" Type="Boolean" Nullable="false" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Account" Relationship="MoneyModel.AcctIDConstraint" FromRole="Transactions" ToRole="Accounts" />
+          <NavigationProperty Name="Category" Relationship="MoneyModel.CategoriesTran" FromRole="Transactions" ToRole="Category" />
+        </EntityType>
+        <Association Name="AcctIDConstraint">
+          <End Role="Accounts" Type="MoneyModel.Account" Multiplicity="1" />
+          <End Role="Transactions" Type="MoneyModel.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AcctID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="AcctID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BankID">
+          <End Role="Banks" Type="MoneyModel.Bank" Multiplicity="1" />
+          <End Role="Accounts" Type="MoneyModel.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Banks_Loans">
+          <End Role="Banks" Type="MoneyModel.Bank" Multiplicity="1" />
+          <End Role="Loans" Type="MoneyModel.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoriesTran">
+          <End Role="Category" Type="MoneyModel.Category" Multiplicity="1" />
+          <End Role="Transactions" Type="MoneyModel.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payees_Loans">
+          <End Role="Payees" Type="MoneyModel.Payee" Multiplicity="1" />
+          <End Role="Loans" Type="MoneyModel.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payees">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Loans">
+              <PropertyRef Name="Company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoneyModelStoreContainer" CdmEntityContainer="MoneyEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="MoneyModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AcctID" ColumnName="AcctID" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="MoneyModel.Bank">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MoneyModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TaxDeductible" ColumnName="TaxDeductible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="MoneyModel.Loan">
+              <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="LoanID" ColumnName="LoanID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payees">
+            <EntityTypeMapping TypeName="MoneyModel.Payee">
+              <MappingFragment StoreEntitySet="Payees">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastAmount" ColumnName="LastAmount" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="To" ColumnName="To" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="MoneyModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="TransID" ColumnName="TransID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AcctID" ColumnName="AcctID" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Reconciled" ColumnName="Reconciled" />
+                <ScalarProperty Name="CheckNum" ColumnName="CheckNum" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
