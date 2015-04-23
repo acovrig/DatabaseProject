@@ -4,19 +4,6 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b51af1befd974221b8a71a7431e3c96b" Name="Diagram1">
-        <EntityTypeShape EntityType="MoneyModel.Account" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Bank" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Category" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Loan" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Payee" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Transaction" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <AssociationConnector Association="MoneyModel.AcctIDConstraint" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.BankID" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.Banks_Loans" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.CategoriesTran" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.Payees_Loans" ManuallyRouted="false" />
-      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

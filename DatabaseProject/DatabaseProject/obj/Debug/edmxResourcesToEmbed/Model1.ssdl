@@ -5,8 +5,29 @@
     <EntitySet Name="Banks" EntityType="MoneyModel.Store.Banks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Category" EntityType="MoneyModel.Store.Category" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Loans" EntityType="MoneyModel.Store.Loans" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Payees" EntityType="MoneyModel.Store.Payees" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Payees" EntityType="MoneyModel.Store.Payees" store:Type="Tables" store:Schema="dbo" store:Name="Payees">
+      <DefiningQuery>SELECT 
+      [Payees].[Name] AS [Name], 
+      [Payees].[LastAmount] AS [LastAmount], 
+      [Payees].[Category] AS [Category], 
+      [Payees].[Note] AS [Note], 
+      [Payees].[To] AS [To]
+      FROM [dbo].[Payees] AS [Payees]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" store:Schema="dbo" store:Name="Transactions">
+      <DefiningQuery>SELECT 
+      [Transactions].[TransID] AS [TransID], 
+      [Transactions].[Amount] AS [Amount], 
+      [Transactions].[AcctID] AS [AcctID], 
+      [Transactions].[To] AS [To], 
+      [Transactions].[From] AS [From], 
+      [Transactions].[CategoryID] AS [CategoryID], 
+      [Transactions].[Note] AS [Note], 
+      [Transactions].[Reconciled] AS [Reconciled], 
+      [Transactions].[CheckNum] AS [CheckNum], 
+      [Transactions].[Image] AS [Image]
+      FROM [dbo].[Transactions] AS [Transactions]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="AcctIDConstraint" Association="MoneyModel.Store.AcctIDConstraint">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Transactions" EntitySet="Transactions" />
@@ -23,16 +44,12 @@
       <End Role="Category" EntitySet="Category" />
       <End Role="Transactions" EntitySet="Transactions" />
     </AssociationSet>
-    <AssociationSet Name="Payees_Loans" Association="MoneyModel.Store.Payees_Loans">
-      <End Role="Payees" EntitySet="Payees" />
-      <End Role="Loans" EntitySet="Loans" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="AcctID" />
     </Key>
-    <Property Name="AcctID" Type="int" Nullable="false" />
+    <Property Name="AcctID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="type" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="BankID" Type="int" Nullable="false" />
   </EntityType>
@@ -40,7 +57,7 @@
     <Key>
       <PropertyRef Name="BankID" />
     </Key>
-    <Property Name="BankID" Type="int" Nullable="false" />
+    <Property Name="BankID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
     <Property Name="Street" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
@@ -54,7 +71,7 @@
     <Key>
       <PropertyRef Name="CategoryID" />
     </Key>
-    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="TaxDeductible" Type="bit" Nullable="false" />
   </EntityType>
@@ -62,11 +79,15 @@
     <Key>
       <PropertyRef Name="LoanID" />
     </Key>
-    <Property Name="LoanID" Type="int" Nullable="false" />
+    <Property Name="LoanID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="BankID" Type="int" Nullable="false" />
     <Property Name="Company" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Money.dbo.Payees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6035: The relationship 'Payees_Loans' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+      -->
   <EntityType Name="Payees">
     <Key>
       <PropertyRef Name="Name" />
@@ -77,6 +98,9 @@
     <Property Name="Note" Type="text" Nullable="false" />
     <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Money.dbo.Transactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="TransID" />
@@ -137,18 +161,6 @@
       </Principal>
       <Dependent Role="Transactions">
         <PropertyRef Name="CategoryID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Payees_Loans">
-    <End Role="Payees" Type="MoneyModel.Store.Payees" Multiplicity="1" />
-    <End Role="Loans" Type="MoneyModel.Store.Loans" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Payees">
-        <PropertyRef Name="Name" />
-      </Principal>
-      <Dependent Role="Loans">
-        <PropertyRef Name="Company" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

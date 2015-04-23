@@ -32,7 +32,7 @@
     <Key>
       <PropertyRef Name="AcctID" />
     </Key>
-    <Property Name="AcctID" Type="Int32" Nullable="false" />
+    <Property Name="AcctID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="BankID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Transactions" Relationship="MoneyModel.AcctIDConstraint" FromRole="Accounts" ToRole="Transactions" />
@@ -42,7 +42,7 @@
     <Key>
       <PropertyRef Name="BankID" />
     </Key>
-    <Property Name="BankID" Type="Int32" Nullable="false" />
+    <Property Name="BankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
     <Property Name="Street" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
     <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />

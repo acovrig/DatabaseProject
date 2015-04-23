@@ -8,107 +8,116 @@ using System.Web.Mvc;
 
 namespace DatabaseProject.Controllers
 {
-    public class Default1Controller : Controller
+    public class LoanController : Controller
     {
         private MoneyEntities db = new MoneyEntities();
 
         //
-        // GET: /Default1/
+        // GET: /Loan/
 
         public ActionResult Index()
         {
-            return View(db.Banks.ToList());
+            var loans = db.Loans.Include(l => l.Bank).Include(l => l.Payee);
+            return View(loans.ToList());
         }
 
         //
-        // GET: /Default1/Details/5
+        // GET: /Loan/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Bank bank = db.Banks.Find(id);
-            if (bank == null)
+            Loan loan = db.Loans.Find(id);
+            if (loan == null)
             {
                 return HttpNotFound();
             }
-            return View(bank);
+            return View(loan);
         }
 
         //
-        // GET: /Default1/Create
+        // GET: /Loan/Create
 
         public ActionResult Create()
         {
+            ViewBag.BankID = new SelectList(db.Banks, "BankID", "Name");
+            ViewBag.Company = new SelectList(db.Payees, "Name", "Category");
             return View();
         }
 
         //
-        // POST: /Default1/Create
+        // POST: /Loan/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Bank bank)
+        public ActionResult Create(Loan loan)
         {
             if (ModelState.IsValid)
             {
-                db.Banks.Add(bank);
+                db.Loans.Add(loan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(bank);
+            ViewBag.BankID = new SelectList(db.Banks, "BankID", "Name", loan.BankID);
+            ViewBag.Company = new SelectList(db.Payees, "Name", "Category", loan.Company);
+            return View(loan);
         }
 
         //
-        // GET: /Default1/Edit/5
+        // GET: /Loan/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Bank bank = db.Banks.Find(id);
-            if (bank == null)
+            Loan loan = db.Loans.Find(id);
+            if (loan == null)
             {
                 return HttpNotFound();
             }
-            return View(bank);
+            ViewBag.BankID = new SelectList(db.Banks, "BankID", "Name", loan.BankID);
+            ViewBag.Company = new SelectList(db.Payees, "Name", "Category", loan.Company);
+            return View(loan);
         }
 
         //
-        // POST: /Default1/Edit/5
+        // POST: /Loan/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Bank bank)
+        public ActionResult Edit(Loan loan)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bank).State = EntityState.Modified;
+                db.Entry(loan).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(bank);
+            ViewBag.BankID = new SelectList(db.Banks, "BankID", "Name", loan.BankID);
+            ViewBag.Company = new SelectList(db.Payees, "Name", "Category", loan.Company);
+            return View(loan);
         }
 
         //
-        // GET: /Default1/Delete/5
+        // GET: /Loan/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Bank bank = db.Banks.Find(id);
-            if (bank == null)
+            Loan loan = db.Loans.Find(id);
+            if (loan == null)
             {
                 return HttpNotFound();
             }
-            return View(bank);
+            return View(loan);
         }
 
         //
-        // POST: /Default1/Delete/5
+        // POST: /Loan/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bank bank = db.Banks.Find(id);
-            db.Banks.Remove(bank);
+            Loan loan = db.Loans.Find(id);
+            db.Loans.Remove(loan);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

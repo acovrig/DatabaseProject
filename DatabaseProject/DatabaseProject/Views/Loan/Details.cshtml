@@ -1,0 +1,36 @@
+﻿@model DatabaseProject.Loan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Loan</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Bank.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Bank.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Payee.Category)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Payee.Category)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.LoanID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

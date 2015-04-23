@@ -12,7 +12,7 @@ GO
 -- tables
 -- Table: Banks
 CREATE TABLE [Banks] (
-    BankID int  NOT NULL PRIMARY KEY,
+    BankID int  NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Name varchar(200)  NOT NULL,
     Street varchar(255)  NOT NULL,
     City varchar(50)  NOT NULL,
