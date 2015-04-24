@@ -10,8 +10,7 @@
       [Payees].[Name] AS [Name], 
       [Payees].[LastAmount] AS [LastAmount], 
       [Payees].[Category] AS [Category], 
-      [Payees].[Note] AS [Note], 
-      [Payees].[To] AS [To]
+      [Payees].[Note] AS [Note]
       FROM [dbo].[Payees] AS [Payees]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
@@ -83,7 +82,6 @@
     <Property Name="LastAmount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="Note" Type="text" Nullable="false" />
-    <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="Transactions">
     <Key>

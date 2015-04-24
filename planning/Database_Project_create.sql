@@ -42,8 +42,6 @@ CREATE TABLE [Payees] (
     LastAmount decimal(10,2)  NOT NULL,
     Category varchar(50)  NOT NULL,
     Note text  NOT NULL,
-    "To" varchar(100)  NOT NULL,
-    CONSTRAINT CategoryName UNIQUE (Category),
     CONSTRAINT CategoriesPay FOREIGN KEY (Category) REFERENCES Category (Name)
 );
 
@@ -80,6 +78,8 @@ INSERT INTO [Banks] (Name, Street, City, ZIP, Phone) VALUES ('The Farmers Bank',
 INSERT INTO [Accounts] (type, BankID) VALUES ('Checking', 1);
 INSERT INTO [Accounts] (type, BankID) VALUES ('Savings', 1);
 INSERT INTO [Category] (Name, TaxDeductible) VALUES ('Food', 0);
-INSERT INTO [Category] (Name, TaxDeductible) VALUES ('ProGrowth', 1);
+INSERT INTO [Category] (Name, TaxDeductible) VALUES ('Utilities', 1);
 INSERT INTO [Transactions] (Amount, AcctID, [To], [From], CategoryID, Note, Reconciled, CheckNum) VALUES (50.37, 1, 'Walmart', 'Bill', 1, 'Food for the week, how boring', 0, 0);
 INSERT INTO [Transactions] (Amount, AcctID, [To], [From], CategoryID, Note, Reconciled, CheckNum) VALUES (506.39, 2, 'BestBuy', 'Bill', 2, 'Emergency HDD replacements', 0, 0);
+INSERT INTO [Payees] (Name, LastAmount, Category, Note) VALUES ('Comcast', 250, 'Utilities', 'Crappy internet');
+INSERT INTO [Payees] (Name, LastAmount, Category, NOte) VALUES ('Sprint', 350, 'Utilities', 'Unlimited Data');

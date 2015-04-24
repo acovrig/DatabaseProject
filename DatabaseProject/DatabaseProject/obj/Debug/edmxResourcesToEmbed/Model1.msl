@@ -48,7 +48,6 @@
           <ScalarProperty Name="LastAmount" ColumnName="LastAmount" />
           <ScalarProperty Name="Category" ColumnName="Category" />
           <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="To" ColumnName="To" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

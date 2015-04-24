@@ -23,7 +23,6 @@ namespace DatabaseProject
         public decimal LastAmount { get; set; }
         public string Category { get; set; }
         public string Note { get; set; }
-        public string To { get; set; }
     
         public virtual ICollection<Loan> Loans { get; set; }
     }

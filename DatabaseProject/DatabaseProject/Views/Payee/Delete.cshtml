@@ -37,13 +37,6 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Note)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.To)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.To)
-    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

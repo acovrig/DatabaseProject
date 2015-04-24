@@ -79,7 +79,6 @@
     <Property Name="LastAmount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="Category" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-    <Property Name="To" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Loans" Relationship="MoneyModel.Payees_Loans" FromRole="Payees" ToRole="Loans" />
   </EntityType>
   <EntityType Name="Transaction">
