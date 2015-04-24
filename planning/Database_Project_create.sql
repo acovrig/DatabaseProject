@@ -60,15 +60,14 @@ CREATE TABLE [Loans] (
 -- Table: Transactions
 CREATE TABLE [Transactions] (
     TransID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    Amount decimal(10,2) NOT NULL,
+	Amount decimal(10,2) NOT NULL,
     AcctID int  NOT NULL,
     "To" varchar(100)  NOT NULL,
     "From" varchar(100)  NOT NULL,
     CategoryID int  NOT NULL,
     Note text  NOT NULL,
     Reconciled bit  NOT NULL,
-    CheckNum bit  NOT NULL,
-    Image image  NOT NULL,
+    CheckNum INT  NOT NULL,
     CONSTRAINT AcctIDConstraint FOREIGN KEY (AcctID) REFERENCES Accounts (AcctID),
     CONSTRAINT CategoriesTran FOREIGN KEY (CategoryID) REFERENCES Category (CategoryID)
 );

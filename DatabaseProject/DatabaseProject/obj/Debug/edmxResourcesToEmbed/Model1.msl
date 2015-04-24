@@ -55,8 +55,8 @@
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="MoneyModel.Transaction">
         <MappingFragment StoreEntitySet="Transactions">
-          <ScalarProperty Name="TransID" ColumnName="TransID" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransID" ColumnName="TransID" />
           <ScalarProperty Name="AcctID" ColumnName="AcctID" />
           <ScalarProperty Name="To" ColumnName="To" />
           <ScalarProperty Name="From" ColumnName="From" />
@@ -64,7 +64,6 @@
           <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="Reconciled" ColumnName="Reconciled" />
           <ScalarProperty Name="CheckNum" ColumnName="CheckNum" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

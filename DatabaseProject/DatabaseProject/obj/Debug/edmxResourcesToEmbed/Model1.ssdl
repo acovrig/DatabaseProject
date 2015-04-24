@@ -14,20 +14,7 @@
       [Payees].[To] AS [To]
       FROM [dbo].[Payees] AS [Payees]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" store:Schema="dbo" store:Name="Transactions">
-      <DefiningQuery>SELECT 
-      [Transactions].[TransID] AS [TransID], 
-      [Transactions].[Amount] AS [Amount], 
-      [Transactions].[AcctID] AS [AcctID], 
-      [Transactions].[To] AS [To], 
-      [Transactions].[From] AS [From], 
-      [Transactions].[CategoryID] AS [CategoryID], 
-      [Transactions].[Note] AS [Note], 
-      [Transactions].[Reconciled] AS [Reconciled], 
-      [Transactions].[CheckNum] AS [CheckNum], 
-      [Transactions].[Image] AS [Image]
-      FROM [dbo].[Transactions] AS [Transactions]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AcctIDConstraint" Association="MoneyModel.Store.AcctIDConstraint">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Transactions" EntitySet="Transactions" />
@@ -98,9 +85,6 @@
     <Property Name="Note" Type="text" Nullable="false" />
     <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-      warning 6002: The table/view 'Money.dbo.Transactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="TransID" />
@@ -113,8 +97,7 @@
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="Note" Type="text" Nullable="false" />
     <Property Name="Reconciled" Type="bit" Nullable="false" />
-    <Property Name="CheckNum" Type="bit" Nullable="false" />
-    <Property Name="Image" Type="image" Nullable="false" />
+    <Property Name="CheckNum" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AcctIDConstraint">
     <End Role="Accounts" Type="MoneyModel.Store.Accounts" Multiplicity="1" />
