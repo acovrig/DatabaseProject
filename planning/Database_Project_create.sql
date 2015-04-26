@@ -42,9 +42,9 @@ CREATE TABLE [RecurringTransaction] (
     RecurringTransactionIDNumberThingyIDoNotLikeThisProject int NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Name varchar(100) NOT NULL UNIQUE,
     ExpectedAmount decimal(10,2) NOT NULL,
-    Category varchar(50) NOT NULL,
+    Category int NOT NULL,
     Note text NOT NULL,
-    CONSTRAINT CategoriesPay FOREIGN KEY (Category) REFERENCES Category (Name)
+    CONSTRAINT TransCategory FOREIGN KEY (Category) REFERENCES Category (CategoryID)
 );
 
 -- Table: Transaction
