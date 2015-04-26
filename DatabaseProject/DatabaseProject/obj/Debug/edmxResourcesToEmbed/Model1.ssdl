@@ -88,10 +88,10 @@
       <PropertyRef Name="TransID" />
     </Key>
     <Property Name="TransID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TransDate" Type="date" Nullable="false" />
     <Property Name="Amount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="AcctID" Type="int" Nullable="false" />
     <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="From" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="Note" Type="text" Nullable="false" />
     <Property Name="Reconciled" Type="bit" Nullable="false" />

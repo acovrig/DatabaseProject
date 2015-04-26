@@ -88,7 +88,6 @@
     <Property Name="TransID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="AcctID" Type="Int32" Nullable="false" />
     <Property Name="To" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="From" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="CategoryID" Type="Int32" Nullable="false" />
     <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
     <Property Name="Reconciled" Type="Boolean" Nullable="false" />
@@ -96,6 +95,7 @@
     <NavigationProperty Name="Account" Relationship="MoneyModel.AcctIDConstraint" FromRole="Transactions" ToRole="Accounts" />
     <NavigationProperty Name="Category" Relationship="MoneyModel.CategoriesTran" FromRole="Transactions" ToRole="Category" />
     <Property Type="Decimal" Name="Amount" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="DateTime" Name="TransDate" Nullable="false" Precision="0" />
   </EntityType>
   <Association Name="AcctIDConstraint">
     <End Role="Accounts" Type="MoneyModel.Account" Multiplicity="1" />
