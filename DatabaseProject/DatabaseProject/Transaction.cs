@@ -17,12 +17,12 @@ namespace DatabaseProject
         public int TransID { get; set; }
         public int AcctID { get; set; }
         public string To { get; set; }
-        public string From { get; set; }
         public int CategoryID { get; set; }
         public string Note { get; set; }
         public bool Reconciled { get; set; }
         public int CheckNum { get; set; }
         public decimal Amount { get; set; }
+        public System.DateTime TransDate { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Category Category { get; set; }

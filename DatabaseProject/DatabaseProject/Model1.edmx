@@ -96,10 +96,10 @@
             <PropertyRef Name="TransID" />
           </Key>
           <Property Name="TransID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TransDate" Type="date" Nullable="false" />
           <Property Name="Amount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="AcctID" Type="int" Nullable="false" />
           <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="From" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Note" Type="text" Nullable="false" />
           <Property Name="Reconciled" Type="bit" Nullable="false" />
@@ -245,7 +245,6 @@
           <Property Name="TransID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AcctID" Type="Int32" Nullable="false" />
           <Property Name="To" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="From" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="Reconciled" Type="Boolean" Nullable="false" />
@@ -253,6 +252,7 @@
           <NavigationProperty Name="Account" Relationship="MoneyModel.AcctIDConstraint" FromRole="Transactions" ToRole="Accounts" />
           <NavigationProperty Name="Category" Relationship="MoneyModel.CategoriesTran" FromRole="Transactions" ToRole="Category" />
           <Property Type="Decimal" Name="Amount" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="DateTime" Name="TransDate" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="AcctIDConstraint">
           <End Role="Accounts" Type="MoneyModel.Account" Multiplicity="1" />
@@ -373,11 +373,11 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="MoneyModel.Transaction">
               <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="TransDate" ColumnName="TransDate" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="TransID" ColumnName="TransID" />
                 <ScalarProperty Name="AcctID" ColumnName="AcctID" />
                 <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="From" ColumnName="From" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Reconciled" ColumnName="Reconciled" />
