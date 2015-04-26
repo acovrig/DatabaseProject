@@ -81,8 +81,8 @@ INSERT INTO [Category] (Name, TaxDeductible) VALUES ('Utilities', 0);
 INSERT INTO [Category] (Name, TaxDeductible) VALUES ('Donations', 1);
 INSERT INTO [Category] (Name, TaxDeductible) VALUES ('Loans', 0);
 
-INSERT INTO [RecurringTransaction] (Name, ExpectedAmount, Category, Note) VALUES ('Comcast', 250.00, 'Utilities', 'Crappy internet');
-INSERT INTO [RecurringTransaction] (Name, ExpectedAmount, Category, Note) VALUES ('Sprint', 350.00, 'Utilities', 'Unlimited data');
+INSERT INTO [RecurringTransaction] (Name, ExpectedAmount, Category, Note) VALUES ('Comcast', 250.00, 3, 'Crappy internet');
+INSERT INTO [RecurringTransaction] (Name, ExpectedAmount, Category, Note) VALUES ('Sprint', 350.00, 3, 'Unlimited data');
 
 INSERT INTO [Transaction] (Amount, TransDate, AcctID, ToFrom, CategoryID, Note, Reconciled, CheckNum) VALUES
     (1000.00, '2014-06-01', 3, 'Initial', 1, 'Initial commit', 1, 0),
