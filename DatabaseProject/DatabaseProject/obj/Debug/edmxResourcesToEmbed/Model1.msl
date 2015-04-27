@@ -1,68 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MoneyModelStoreContainer" CdmEntityContainer="MoneyEntities">
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="MoneyModel.Account">
-        <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="AcctID" ColumnName="AcctID" />
-          <ScalarProperty Name="type" ColumnName="type" />
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="MoneyModel.Bank">
+        <MappingFragment StoreEntitySet="Bank">
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="BankID" ColumnName="BankID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Banks">
-      <EntityTypeMapping TypeName="MoneyModel.Bank">
-        <MappingFragment StoreEntitySet="Banks">
+    <EntitySetMapping Name="BankAccounts">
+      <EntityTypeMapping TypeName="MoneyModel.BankAccount">
+        <MappingFragment StoreEntitySet="BankAccount">
           <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Street" ColumnName="Street" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="AcctID" ColumnName="AcctID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MoneyModel.Category">
         <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="TaxDeductible" ColumnName="TaxDeductible" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Loans">
-      <EntityTypeMapping TypeName="MoneyModel.Loan">
-        <MappingFragment StoreEntitySet="Loans">
-          <ScalarProperty Name="LoanID" ColumnName="LoanID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="BankID" ColumnName="BankID" />
-          <ScalarProperty Name="Company" ColumnName="Company" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Payees">
-      <EntityTypeMapping TypeName="MoneyModel.Payee">
-        <MappingFragment StoreEntitySet="Payees">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="LastAmount" ColumnName="LastAmount" />
-          <ScalarProperty Name="Category" ColumnName="Category" />
+    <EntitySetMapping Name="RecurringTransactions">
+      <EntityTypeMapping TypeName="MoneyModel.RecurringTransaction">
+        <MappingFragment StoreEntitySet="RecurringTransaction">
           <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ExpectedAmount" ColumnName="ExpectedAmount" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RecurringTransactionIDNumberThingyIDoNotLikeThisProject" ColumnName="RecurringTransactionIDNumberThingyIDoNotLikeThisProject" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="MoneyModel.Transaction">
-        <MappingFragment StoreEntitySet="Transactions">
-          <ScalarProperty Name="TransDate" ColumnName="TransDate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="TransID" ColumnName="TransID" />
-          <ScalarProperty Name="AcctID" ColumnName="AcctID" />
-          <ScalarProperty Name="To" ColumnName="To" />
-          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="Reconciled" ColumnName="Reconciled" />
+        <MappingFragment StoreEntitySet="Transaction">
           <ScalarProperty Name="CheckNum" ColumnName="CheckNum" />
+          <ScalarProperty Name="Reconciled" ColumnName="Reconciled" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ToFrom" ColumnName="ToFrom" />
+          <ScalarProperty Name="AcctID" ColumnName="AcctID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransDate" ColumnName="TransDate" />
+          <ScalarProperty Name="TransID" ColumnName="TransID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -5,17 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5bbae09ad1e0464a827d8a95aa58c02f" Name="Diagram1">
-        <EntityTypeShape EntityType="MoneyModel.Account" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Bank" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Category" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Loan" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Payee" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MoneyModel.Transaction" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <AssociationConnector Association="MoneyModel.AcctIDConstraint" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.BankID" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.Banks_Loans" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.CategoriesTran" ManuallyRouted="false" />
-        <AssociationConnector Association="MoneyModel.Payees_Loans" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MoneyModel.Bank" Width="1.5" PointX="3.1090187556617983" PointY="7.4457221512895648" />
+        <EntityTypeShape EntityType="MoneyModel.BankAccount" Width="1.5" PointX="4.02981649526852" PointY="27.166397733225672" />
+        <EntityTypeShape EntityType="MoneyModel.Category" Width="1.5" PointX="7.2912718054332171" PointY="1.8063158550329115" />
+        <EntityTypeShape EntityType="MoneyModel.RecurringTransaction" Width="1.5" PointX="3.1683508507760014" PointY="3.2528791889794539" />
+        <EntityTypeShape EntityType="MoneyModel.Transaction" Width="1.5" PointX="5.3556748970205312" PointY="30.880457519963596" />
+        <AssociationConnector Association="MoneyModel.BankID" />
+        <AssociationConnector Association="MoneyModel.AcctIDConstraint" />
+        <AssociationConnector Association="MoneyModel.CategoriesTran" />
+        <AssociationConnector Association="MoneyModel.TransCategory" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

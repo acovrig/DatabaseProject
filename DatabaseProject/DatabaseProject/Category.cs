@@ -17,6 +17,7 @@ namespace DatabaseProject
         public Category()
         {
             this.Transactions = new HashSet<Transaction>();
+            this.RecurringTransactions = new HashSet<RecurringTransaction>();
         }
     
         public int CategoryID { get; set; }
@@ -24,5 +25,6 @@ namespace DatabaseProject
         public bool TaxDeductible { get; set; }
     
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<RecurringTransaction> RecurringTransactions { get; set; }
     }
 }

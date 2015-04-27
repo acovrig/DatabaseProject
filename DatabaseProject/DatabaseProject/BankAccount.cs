@@ -12,18 +12,19 @@ namespace DatabaseProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Payee
+    public partial class BankAccount
     {
-        public Payee()
+        public BankAccount()
         {
-            this.Loans = new HashSet<Loan>();
+            this.Transactions = new HashSet<Transaction>();
         }
     
+        public int AcctID { get; set; }
         public string Name { get; set; }
-        public decimal LastAmount { get; set; }
-        public string Category { get; set; }
-        public string Note { get; set; }
+        public string Type { get; set; }
+        public int BankID { get; set; }
     
-        public virtual ICollection<Loan> Loans { get; set; }
+        public virtual Bank Bank { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

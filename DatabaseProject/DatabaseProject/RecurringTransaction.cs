@@ -12,14 +12,14 @@ namespace DatabaseProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Loan
+    public partial class RecurringTransaction
     {
-        public int LoanID { get; set; }
+        public int RecurringTransactionIDNumberThingyIDoNotLikeThisProject { get; set; }
         public string Name { get; set; }
-        public int BankID { get; set; }
-        public string Company { get; set; }
+        public decimal ExpectedAmount { get; set; }
+        public int Category { get; set; }
+        public string Note { get; set; }
     
-        public virtual Bank Bank { get; set; }
-        public virtual Payee Payee { get; set; }
+        public virtual Category Category1 { get; set; }
     }
 }

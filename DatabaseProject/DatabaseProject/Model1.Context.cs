@@ -25,11 +25,10 @@ namespace DatabaseProject
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Account> Accounts { get; set; }
         public DbSet<Bank> Banks { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Loan> Loans { get; set; }
-        public DbSet<Payee> Payees { get; set; }
+        public DbSet<RecurringTransaction> RecurringTransactions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
     }
 }

@@ -16,8 +16,7 @@ namespace DatabaseProject
     {
         public Bank()
         {
-            this.Accounts = new HashSet<Account>();
-            this.Loans = new HashSet<Loan>();
+            this.BankAccounts = new HashSet<BankAccount>();
         }
     
         public int BankID { get; set; }
@@ -27,7 +26,6 @@ namespace DatabaseProject
         public int ZIP { get; set; }
         public long Phone { get; set; }
     
-        public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<Loan> Loans { get; set; }
+        public virtual ICollection<BankAccount> BankAccounts { get; set; }
     }
 }

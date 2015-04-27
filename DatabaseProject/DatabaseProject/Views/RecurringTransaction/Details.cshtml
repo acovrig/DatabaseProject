@@ -1,0 +1,43 @@
+﻿@model DatabaseProject.RecurringTransaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RecurringTransaction</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExpectedAmount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExpectedAmount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Category1.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category1.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Note)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Note)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

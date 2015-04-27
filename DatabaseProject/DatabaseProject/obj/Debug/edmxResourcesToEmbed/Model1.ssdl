@@ -1,45 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MoneyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="MoneyModelStoreContainer">
-    <EntitySet Name="Accounts" EntityType="MoneyModel.Store.Accounts" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Banks" EntityType="MoneyModel.Store.Banks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bank" EntityType="MoneyModel.Store.Bank" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankAccount" EntityType="MoneyModel.Store.BankAccount" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Category" EntityType="MoneyModel.Store.Category" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Loans" EntityType="MoneyModel.Store.Loans" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Payees" EntityType="MoneyModel.Store.Payees" store:Type="Tables" store:Schema="dbo" store:Name="Payees">
-      <DefiningQuery>SELECT 
-      [Payees].[Name] AS [Name], 
-      [Payees].[LastAmount] AS [LastAmount], 
-      [Payees].[Category] AS [Category], 
-      [Payees].[Note] AS [Note]
-      FROM [dbo].[Payees] AS [Payees]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Transactions" EntityType="MoneyModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RecurringTransaction" EntityType="MoneyModel.Store.RecurringTransaction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transaction" EntityType="MoneyModel.Store.Transaction" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AcctIDConstraint" Association="MoneyModel.Store.AcctIDConstraint">
-      <End Role="Accounts" EntitySet="Accounts" />
-      <End Role="Transactions" EntitySet="Transactions" />
+      <End Role="BankAccount" EntitySet="BankAccount" />
+      <End Role="Transaction" EntitySet="Transaction" />
     </AssociationSet>
     <AssociationSet Name="BankID" Association="MoneyModel.Store.BankID">
-      <End Role="Banks" EntitySet="Banks" />
-      <End Role="Accounts" EntitySet="Accounts" />
-    </AssociationSet>
-    <AssociationSet Name="Banks_Loans" Association="MoneyModel.Store.Banks_Loans">
-      <End Role="Banks" EntitySet="Banks" />
-      <End Role="Loans" EntitySet="Loans" />
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="BankAccount" EntitySet="BankAccount" />
     </AssociationSet>
     <AssociationSet Name="CategoriesTran" Association="MoneyModel.Store.CategoriesTran">
       <End Role="Category" EntitySet="Category" />
-      <End Role="Transactions" EntitySet="Transactions" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="TransCategory" Association="MoneyModel.Store.TransCategory">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="RecurringTransaction" EntitySet="RecurringTransaction" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Accounts">
-    <Key>
-      <PropertyRef Name="AcctID" />
-    </Key>
-    <Property Name="AcctID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="type" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="BankID" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Banks">
+  <EntityType Name="Bank">
     <Key>
       <PropertyRef Name="BankID" />
     </Key>
@@ -50,9 +34,15 @@
     <Property Name="ZIP" Type="int" Nullable="false" />
     <Property Name="Phone" Type="bigint" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-      warning 6035: The relationship 'CategoriesPay' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-      -->
+  <EntityType Name="BankAccount">
+    <Key>
+      <PropertyRef Name="AcctID" />
+    </Key>
+    <Property Name="AcctID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Type" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="BankID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="CategoryID" />
@@ -61,29 +51,17 @@
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="TaxDeductible" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="Loans">
+  <EntityType Name="RecurringTransaction">
     <Key>
-      <PropertyRef Name="LoanID" />
+      <PropertyRef Name="RecurringTransactionIDNumberThingyIDoNotLikeThisProject" />
     </Key>
-    <Property Name="LoanID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RecurringTransactionIDNumberThingyIDoNotLikeThisProject" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="BankID" Type="int" Nullable="false" />
-    <Property Name="Company" Type="varchar" Nullable="false" MaxLength="100" />
-  </EntityType>
-  <!--Errors Found During Generation:
-      warning 6002: The table/view 'Money.dbo.Payees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      warning 6035: The relationship 'Payees_Loans' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-      -->
-  <EntityType Name="Payees">
-    <Key>
-      <PropertyRef Name="Name" />
-    </Key>
-    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="LastAmount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ExpectedAmount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Category" Type="int" Nullable="false" />
     <Property Name="Note" Type="text" Nullable="false" />
   </EntityType>
-  <EntityType Name="Transactions">
+  <EntityType Name="Transaction">
     <Key>
       <PropertyRef Name="TransID" />
     </Key>
@@ -91,57 +69,57 @@
     <Property Name="TransDate" Type="date" Nullable="false" />
     <Property Name="Amount" Type="decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="AcctID" Type="int" Nullable="false" />
-    <Property Name="To" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="ToFrom" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="Note" Type="text" Nullable="false" />
     <Property Name="Reconciled" Type="bit" Nullable="false" />
     <Property Name="CheckNum" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AcctIDConstraint">
-    <End Role="Accounts" Type="MoneyModel.Store.Accounts" Multiplicity="1" />
-    <End Role="Transactions" Type="MoneyModel.Store.Transactions" Multiplicity="*" />
+    <End Role="BankAccount" Type="MoneyModel.Store.BankAccount" Multiplicity="1" />
+    <End Role="Transaction" Type="MoneyModel.Store.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Accounts">
+      <Principal Role="BankAccount">
         <PropertyRef Name="AcctID" />
       </Principal>
-      <Dependent Role="Transactions">
+      <Dependent Role="Transaction">
         <PropertyRef Name="AcctID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="BankID">
-    <End Role="Banks" Type="MoneyModel.Store.Banks" Multiplicity="1" />
-    <End Role="Accounts" Type="MoneyModel.Store.Accounts" Multiplicity="*" />
+    <End Role="Bank" Type="MoneyModel.Store.Bank" Multiplicity="1" />
+    <End Role="BankAccount" Type="MoneyModel.Store.BankAccount" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Banks">
+      <Principal Role="Bank">
         <PropertyRef Name="BankID" />
       </Principal>
-      <Dependent Role="Accounts">
-        <PropertyRef Name="BankID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Banks_Loans">
-    <End Role="Banks" Type="MoneyModel.Store.Banks" Multiplicity="1" />
-    <End Role="Loans" Type="MoneyModel.Store.Loans" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Banks">
-        <PropertyRef Name="BankID" />
-      </Principal>
-      <Dependent Role="Loans">
+      <Dependent Role="BankAccount">
         <PropertyRef Name="BankID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="CategoriesTran">
     <End Role="Category" Type="MoneyModel.Store.Category" Multiplicity="1" />
-    <End Role="Transactions" Type="MoneyModel.Store.Transactions" Multiplicity="*" />
+    <End Role="Transaction" Type="MoneyModel.Store.Transaction" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
         <PropertyRef Name="CategoryID" />
       </Principal>
-      <Dependent Role="Transactions">
+      <Dependent Role="Transaction">
         <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransCategory">
+    <End Role="Category" Type="MoneyModel.Store.Category" Multiplicity="1" />
+    <End Role="RecurringTransaction" Type="MoneyModel.Store.RecurringTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="RecurringTransaction">
+        <PropertyRef Name="Category" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
