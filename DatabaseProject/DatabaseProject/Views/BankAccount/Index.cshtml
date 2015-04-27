@@ -20,7 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Bank.Name)
         </th>
-        <th></th>
+        <th>
+            Balance
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -33,6 +35,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Bank.Name)
+        </td>
+        <td>
+            <!-- // SELECT SUM(SELECT Amount FROM Transaction WHERE BankA) FROM BankAccount WHERE Name = item.Name; -->
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
