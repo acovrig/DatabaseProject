@@ -37,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.Bank.Name)
         </td>
         <td>
-            <!-- // SELECT SUM(SELECT Amount FROM Transaction WHERE BankA) FROM BankAccount WHERE Name = item.Name; -->
+            @Html.DisplayFor(modelItem => item.Balance)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AcctID }) |
