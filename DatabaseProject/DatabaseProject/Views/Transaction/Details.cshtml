@@ -9,12 +9,8 @@
 <fieldset>
     <legend>Transaction</legend>
 
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TransID)
-    </div>
-
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.TransDate)
+         Date
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.TransDate)
@@ -28,21 +24,21 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.BankAccount.Name)
+         Account
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.BankAccount.Name)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ToFrom)
+         To/From
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ToFrom)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Category.Name)
+         Category
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Category.Name)
@@ -63,7 +59,7 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.CheckNum)
+         Check #
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.CheckNum)

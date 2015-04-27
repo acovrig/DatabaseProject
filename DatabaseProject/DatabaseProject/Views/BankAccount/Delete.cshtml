@@ -10,10 +10,6 @@
 <fieldset>
     <legend>BankAccount</legend>
 
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AcctID)
-    </div>
-
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Name)
     </div>
@@ -29,7 +25,7 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Bank.Name)
+         Bank
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Bank.Name)

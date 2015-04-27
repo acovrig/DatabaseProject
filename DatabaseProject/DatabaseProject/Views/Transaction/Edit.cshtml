@@ -13,13 +13,8 @@
     <fieldset>
         <legend>Transaction</legend>
 
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TransID)
-            @Html.ValidationMessageFor(model => model.TransID)
-        </div>
-
         <div class="editor-label">
-            @Html.LabelFor(model => model.TransDate)
+            Date
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.TransDate)
@@ -35,7 +30,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AcctID, "BankAccount")
+            Account
         </div>
         <div class="editor-field">
             @Html.DropDownList("AcctID", String.Empty)
@@ -43,7 +38,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ToFrom)
+            To/From
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ToFrom)
@@ -51,7 +46,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CategoryID, "Category")
+            Category
         </div>
         <div class="editor-field">
             @Html.DropDownList("CategoryID", String.Empty)
@@ -75,7 +70,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CheckNum)
+            Check #
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.CheckNum)

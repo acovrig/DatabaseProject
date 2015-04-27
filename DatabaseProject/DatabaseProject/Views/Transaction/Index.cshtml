@@ -15,19 +15,19 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TransDate)
+            Date
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BankAccount.Name)
+            Account
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ToFrom)
+            To/From
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            Category
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Note)
@@ -36,7 +36,7 @@
             @Html.DisplayNameFor(model => model.Reconciled)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CheckNum)
+            Check #
         </th>
         <th></th>
     </tr>
@@ -61,7 +61,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Note)
         </td>
-        <td>
+        <td style="text-align: center">
             @Html.DisplayFor(modelItem => item.Reconciled)
         </td>
         <td>

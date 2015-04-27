@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TaxDeductible)
+            Tax Deductible
         </th>
         <th></th>
     </tr>
@@ -28,7 +28,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.TaxDeductible)
         </td>
-        <td>
+        <td style="text-align: center">
             @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
             @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
