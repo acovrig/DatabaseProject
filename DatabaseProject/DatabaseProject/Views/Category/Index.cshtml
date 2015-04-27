@@ -25,10 +25,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
+        <td style="text-align: center">
             @Html.DisplayFor(modelItem => item.TaxDeductible)
         </td>
-        <td style="text-align: center">
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
             @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
