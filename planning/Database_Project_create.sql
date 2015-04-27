@@ -103,4 +103,9 @@ CREATE LOGIN [web] WITH	PASSWORD = 'IQx2>WGX3R-5gX8keljj';
 GO
 */
 CREATE USER [web] FOR LOGIN [web];
+CREATE USER [IIS APPPOOL\DefaultAppPool] FOR LOGIN [IIS APPPOOL\DefaultAppPool]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [IIS APPPOOL\DefaultAppPool]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [IIS APPPOOL\DefaultAppPool]
 GO
