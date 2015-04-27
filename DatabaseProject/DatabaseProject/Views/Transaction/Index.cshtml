@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<DatabaseProject.Transaction>
 
+@using System.Globalization;
+
 @{
     ViewBag.Title = "Transactions";
 }
+
 
 <h2>Transactions</h2>
 
@@ -41,10 +44,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TransDate)
+            @Html.DisplayFor(modelItem => item.TransDate.ToString("d", DateTimeFormatInfo.InvariantInfo))
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Amount)
+            <!--
+            if(item.Amount <0) {
+                print "\-$" . item.Amount*-1;
+            } else{
+                print "\$" . item.Amount;
+            }
+            -->
+
+            $@Html.DisplayFor(modelItem => item.Amount)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BankAccount.Name)
@@ -65,9 +76,9 @@
             @Html.DisplayFor(modelItem => item.CheckNum)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { id=item.PrimaryKey }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PrimaryKey }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PrimaryKey })
         </td>
     </tr>
 }
