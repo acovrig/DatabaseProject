@@ -44,18 +44,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TransDate)
+            @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            <!--
-            if(item.Amount <0) {
-                print "\-$" . item.Amount*-1;
-            } else{
-                print "\$" . item.Amount;
-            }
-            -->
-
-            $@Html.DisplayFor(modelItem => item.Amount)
+            $@Html.DisplayFor(modelItem => item.Value)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BankAccount.Name)
