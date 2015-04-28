@@ -1,21 +1,22 @@
 namespace DatabaseProject
 {
 	using System;
-	using System.Collections.Generic;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
-	public partial class Transaction
-	{
-		public String Date {
-			get { return TransDate.ToString("d"); }
+    public partial class Transaction
+    {
+        [DisplayFormat(DataFormatString = "{0:d}")]
+		public DateTime Date {
+			get { return TransDate; }
 		}
-		public String Value {
-			get {
-				if(Amount < 0) {
-					return "-$" + (Amount * -1);
-				} else {
-					return "$" + Amount;
-				}
-			}
-		}
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public Decimal FormattedAmount
+        {
+            get
+            {
+                return Amount;
+            }
+        }
 	}
 }

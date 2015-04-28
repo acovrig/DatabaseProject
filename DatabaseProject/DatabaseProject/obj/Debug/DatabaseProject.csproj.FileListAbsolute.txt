@@ -235,4 +235,3 @@ Z:\Dropbox\class\database-cptr319a\DatabaseProject\DatabaseProject\DatabaseProje
 Z:\Dropbox\class\database-cptr319a\DatabaseProject\DatabaseProject\DatabaseProject\bin\es\System.Spatial.resources.dll
 Z:\Dropbox\class\database-cptr319a\DatabaseProject\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.dll
 Z:\Dropbox\class\database-cptr319a\DatabaseProject\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.pdb
-Z:\Dropbox\class\database-cptr319a\DatabaseProject\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.csprojResolveAssemblyReference.cache
