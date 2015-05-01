@@ -2,20 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class RecurringTransaction
     {
-        public String Value {
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public Decimal Value {
             get {
-                if (ExpectedAmount < 0)
-                {
-                    return "-$" + (ExpectedAmount * -1);
-                }
-                else
-                {
-                    return "$" + ExpectedAmount;
+                return ExpectedAmount;
                 }
             }
         }
-    }
 }
